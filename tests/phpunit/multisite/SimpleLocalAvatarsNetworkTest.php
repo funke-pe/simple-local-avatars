@@ -112,7 +112,7 @@ class SimpleLocalAvatarsNetworkTest extends \WP_Mock\Tools\TestCase {
 		] );
 		WP_Mock::userFunction( 'is_multisite', [
 			'return' => true,
-			'times'  => 2,
+			'times'  => 1,
 		] );
 		WP_Mock::userFunction( 'switch_to_blog', [
 			'return' => true,
