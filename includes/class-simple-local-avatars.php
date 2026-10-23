@@ -428,10 +428,13 @@ class Simple_Local_Avatars {
 
 		if ( $is_shared ) {
 			$origin_blog_id = ! empty( $local_avatars['blog_id'] ) ? $local_avatars['blog_id'] : get_main_site_id();
-			switch_to_blog( $origin_blog_id );
 		}
 
 		try {
+			if ( $is_shared ) {
+				switch_to_blog( $origin_blog_id );
+			}
+
 			// Keep file lookup, resizing and URL resolution in the avatar's origin site.
 			if ( ! empty( $local_avatars['media_id'] ) ) {
 				$avatar_full_path = get_attached_file( $local_avatars['media_id'] );

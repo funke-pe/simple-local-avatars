@@ -31,6 +31,7 @@ class SharedAvatarUrlTest extends \WP_Mock\Tools\TestCase {
 			'save error'                => [ [ 'failure' => 'save' ] ],
 			'already correct size'      => [ [ 'exact' => true ] ],
 			'deleted attachment'        => [ [ 'deleted' => true ] ],
+			'switch callback exception' => [ [ 'exception' => 'switch' ] ],
 			'attachment exception'      => [ [ 'exception' => 'attachment' ] ],
 			'editor exception'          => [ [ 'exception' => 'editor' ] ],
 			'filter override'           => [ [ 'override' => 'https://cdn.example/avatar.png' ] ],
@@ -93,9 +94,12 @@ class SharedAvatarUrlTest extends \WP_Mock\Tools\TestCase {
 		WP_Mock::userFunction( 'get_main_site_id', [ 'return' => 1 ] );
 		WP_Mock::userFunction( 'switch_to_blog' )->with( $origin )
 			->times( $shared && ! $short_circuit ? 1 : 0 )
-			->andReturnUsing( function () use ( $origin ) {
+			->andReturnUsing( function () use ( $origin, $config ) {
 				$this->assertSame( 2, $this->blog_id );
 				$this->blog_id = $origin;
+				if ( 'switch' === $config['exception'] ) {
+					throw new RuntimeException( 'Switch callback failure' );
+				}
 				return true;
 			} );
 		WP_Mock::userFunction( 'restore_current_blog' )
