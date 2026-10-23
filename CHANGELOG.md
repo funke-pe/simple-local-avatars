@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file, per [the Keep a Changelog standard](http://keepachangelog.com/).
 
 ## [Unreleased] - TBD
+### Fixed
+- Generate shared multisite avatar sizes using the origin site's upload paths and URLs, recover empty cached sizes, and preserve the original image when a resized URL cannot be resolved.
 
 ## [2.8.6] - 2026-02-17
 ### Changed
