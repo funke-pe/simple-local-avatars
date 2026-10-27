@@ -1,0 +1,10 @@
+{
+	"name": "funke-pe/simple-local-avatars",
+	"description": "Simple Local Avatars 2.8.6 distribution with Funke shared multisite avatar fixes for Partisans.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"homepage": "https://github.com/funke-pe/simple-local-avatars",
+	"require": {
+		"php": ">=7.4"
+	}
+}
