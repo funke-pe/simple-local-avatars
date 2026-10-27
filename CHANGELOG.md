@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 ## [Unreleased] - TBD
 ### Fixed
 - Generate shared multisite avatar sizes using the origin site's upload paths and URLs, recover empty cached sizes, and preserve the original image when a resized URL cannot be resolved.
+- Preserve Media Library originals when deleting or replacing avatars whose cached sizes reference the full-size image.
 
 ## [2.8.6] - 2026-02-17
 ### Changed

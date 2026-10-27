@@ -1248,8 +1248,10 @@ class Simple_Local_Avatars {
 			return;
 		}
 
+		$media_original = null;
 		// if it was uploaded media, don't erase the full size or try to erase an the ID
 		if ( array_key_exists( 'media_id', $old_avatars ) ) {
+			$media_original = isset( $old_avatars['full'] ) ? $old_avatars['full'] : null;
 			unset( $old_avatars['media_id'], $old_avatars['full'] );
 		}
 
@@ -1262,6 +1264,11 @@ class Simple_Local_Avatars {
 			$upload_path = wp_upload_dir();
 
 			foreach ( $old_avatars as $old_avatar ) {
+				// Failed or unnecessary resizing can cache the original as a size fallback.
+				if ( null !== $media_original && $old_avatar === $media_original ) {
+					continue;
+				}
+
 				// Ensure the avatar is in the uploads directory before we delete it.
 				if ( strpos( $old_avatar, $upload_path['baseurl'] ) !== 0 ) {
 					continue;
